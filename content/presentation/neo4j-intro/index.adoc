@@ -150,15 +150,13 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 
 == Demo time!
 
-Code available on: 
+image::{img}/podcast_model.png[width="550px" float="left"]
 
-image::{img}/[]
+Code available on GitHub:
 
-== Demo time!
+https://github.com/neo4jrb/neo4apis-itunes
 
-Code available on: 
-
-image::{img}/[]
+https://github.com/neo4j-examples/six_degrees_of_myke
 
 == Thank you!  My info again:
 
