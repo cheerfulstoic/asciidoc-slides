@@ -119,8 +119,8 @@ MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]-
 == Neo4j Resources
 
  * http://graphdatabases.com O'Reilly's Graph Databases (free and a great intro to the internals of Neo4j)
- * http://neo4j.com/developer/ruby/ Neo4j.com Ruby guides
- * http://neo4j.com/developer/cypher/ Introduction to Cypher
+ * http://neo4j.com/developer/ruby/ Neo4j Ruby guides
+ * http://neo4j.com/developer/cypher/ Cypher Introduction
 
 == Why should Rubyists use Neo4j?
 
@@ -267,28 +267,63 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 * will_paginate
 * paperclip
 * searchkick
+* factory_girl
 
 +++ <!-- Briefly mention neo4apis project here and specifically neo4apis-activerecord --> +++
 
-== Projects built with neo4j gem
+== Projects built with neo4j gem (libraries)
 
 * https://github.com/neo4jrb/neo4apis[neo4apis]
-* https://github.com/neo4jrb/neo4apis-twitter[neo4apis-twitter]
+* https://github.com/neo4jrb/neo4apis-twitter[neo4apis-twitter], https://github.com/neo4jrb/neo4apis-github[neo4apis-github], https://github.com/neo4jrb/neo4apis-activerecord[neo4apis-activerecord]
+* https://github.com/neo4j-examples/graph_starter[graph_starter]
+
+== Projects built with neo4j gem (applications)
+
+* https://github.com/neo4j-examples/ruby_code_analytics[ruby_code_analytics]
+* https://github.com/neo4j-examples/graphgist_portal[graphgist_portal]
+* https://github.com/neo4j-examples/six_degrees_of_myke[six_degrees_of_myke]
+
+== Projects built with neo4j gem (applications)
+
 * https://github.com/neo4jrb/twitter_analytics[twitter_analytics]
 * http://railsrumble.com/entries/378-graphnote[graphnote]
-* https://github.com/neo4jrb/meta_model[meta_model]
+
+== Neo4j.rb resources
+
+* http://neo4jrb.io/[Neo4j.rb homepage]
+* https://github.com/neo4jrb/neo4j[neo4j gem]
+* http://neo4j.com/developer/ruby-course/[Neo4j Ruby intro course]
+
+== Neo4j.rb resources (videos)
+
+* https://www.youtube.com/playlist?list=PL5klM3mD6alLUhNTPTbj5a3GBjU7oZN0t[Short screencast series]
 
 == Demo time!
 
-Code available on: https://github.com/neo4jrb/lapd_incidents
+Code available on: https://github.com/neo4j-examples/ruby_code_analytics
 
-image::{img}/lapd_csv.png[]
+Example on Heroku: https://ruby-neo4j-code-analysis.herokuapp.com/
+
+++++
+<style>
+  div#just-this-list div.ulist li { font-size: 1em; }
+</style>
+<br/>
+<div id="just-this-list">
+++++
+
+Uses:
+
+* Ruby's http://ruby-doc.org/core-2.0.0/TracePoint.html[TracePoint] library to trace the execution of Ruby code
+* The https://github.com/whitequark/parser[parser] gem to parse the AST of files where code was executed
+
+++++
+</div id="just-this-list">
+++++
 
 == Demo time!
 
-Code available on: https://github.com/neo4jrb/lapd_incidents
-
-image::{img}/lapd_model.png[height="400"]
+image::{img}/ruby_code_analysis_model.png[height="450"]
 
 == Thank you!  My info again:
 

@@ -165,8 +165,8 @@ p {
 <div class="ulist">
 <ul>
 <li><a class="bare" href="http://graphdatabases.com">http://graphdatabases.com</a> O&#8217;Reilly&#8217;s Graph Databases (free and a great intro to the internals of Neo4j)</li>
-<li><a class="bare" href="http://neo4j.com/developer/ruby/">http://neo4j.com/developer/ruby/</a> Neo4j.com Ruby guides</li>
-<li><a class="bare" href="http://neo4j.com/developer/cypher/">http://neo4j.com/developer/cypher/</a> Introduction to Cypher</li>
+<li><a class="bare" href="http://neo4j.com/developer/ruby/">http://neo4j.com/developer/ruby/</a> Neo4j Ruby guides</li>
+<li><a class="bare" href="http://neo4j.com/developer/cypher/">http://neo4j.com/developer/cypher/</a> Cypher Introduction</li>
 </ul>
 </div>
 </section>
@@ -336,37 +336,81 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 <li>will_paginate</li>
 <li>paperclip</li>
 <li>searchkick</li>
+<li>factory_girl</li>
 </ul>
 </div>
 <div class="paragraph"><p> <!-- Briefly mention neo4apis project here and specifically neo4apis-activerecord --> </p></div>
 </section>
 <section class="slide">
-<h2>Projects built with neo4j gem</h2>
+<h2>Projects built with neo4j gem (libraries)</h2>
 <div class="ulist">
 <ul>
 <li><a href="https://github.com/neo4jrb/neo4apis">neo4apis</a></li>
-<li><a href="https://github.com/neo4jrb/neo4apis-twitter">neo4apis-twitter</a></li>
+<li><a href="https://github.com/neo4jrb/neo4apis-twitter">neo4apis-twitter</a>, <a href="https://github.com/neo4jrb/neo4apis-github">neo4apis-github</a>, <a href="https://github.com/neo4jrb/neo4apis-activerecord">neo4apis-activerecord</a></li>
+<li><a href="https://github.com/neo4j-examples/graph_starter">graph_starter</a></li>
+</ul>
+</div>
+</section>
+<section class="slide">
+<h2>Projects built with neo4j gem (applications)</h2>
+<div class="ulist">
+<ul>
+<li><a href="https://github.com/neo4j-examples/ruby_code_analytics">ruby_code_analytics</a></li>
+<li><a href="https://github.com/neo4j-examples/graphgist_portal">graphgist_portal</a></li>
+<li><a href="https://github.com/neo4j-examples/six_degrees_of_myke">six_degrees_of_myke</a></li>
+</ul>
+</div>
+</section>
+<section class="slide">
+<h2>Projects built with neo4j gem (applications)</h2>
+<div class="ulist">
+<ul>
 <li><a href="https://github.com/neo4jrb/twitter_analytics">twitter_analytics</a></li>
 <li><a href="http://railsrumble.com/entries/378-graphnote">graphnote</a></li>
-<li><a href="https://github.com/neo4jrb/meta_model">meta_model</a></li>
+</ul>
+</div>
+</section>
+<section class="slide">
+<h2>Neo4j.rb resources</h2>
+<div class="ulist">
+<ul>
+<li><a href="http://neo4jrb.io/">Neo4j.rb homepage</a></li>
+<li><a href="https://github.com/neo4jrb/neo4j">neo4j gem</a></li>
+<li><a href="http://neo4j.com/developer/ruby-course/">Neo4j Ruby intro course</a></li>
+</ul>
+</div>
+</section>
+<section class="slide">
+<h2>Neo4j.rb resources (videos)</h2>
+<div class="ulist">
+<ul>
+<li><a href="https://www.youtube.com/playlist?list=PL5klM3mD6alLUhNTPTbj5a3GBjU7oZN0t">Short screencast series</a></li>
 </ul>
 </div>
 </section>
 <section class="slide">
 <h2>Demo time!</h2>
-<div class="paragraph"><p>Code available on: <a class="bare" href="https://github.com/neo4jrb/lapd_incidents">https://github.com/neo4jrb/lapd_incidents</a></p></div>
-<div class="imageblock">
-<div class="content">
-<img alt="lapd csv" src="img/lapd_csv.png">
+<div class="paragraph"><p>Code available on: <a class="bare" href="https://github.com/neo4j-examples/ruby_code_analytics">https://github.com/neo4j-examples/ruby_code_analytics</a></p></div>
+<div class="paragraph"><p>Example on Heroku: <a class="bare" href="https://ruby-neo4j-code-analysis.herokuapp.com/">https://ruby-neo4j-code-analysis.herokuapp.com/</a></p></div>
+<style>
+  div#just-this-list div.ulist li { font-size: 1em; }
+</style>
+<br/>
+<div id="just-this-list">
+<div class="paragraph"><p>Uses:</p></div>
+<div class="ulist">
+<ul>
+<li>Ruby&#8217;s <a href="http://ruby-doc.org/core-2.0.0/TracePoint.html">TracePoint</a> library to trace the execution of Ruby code</li>
+<li>The <a href="https://github.com/whitequark/parser">parser</a> gem to parse the AST of files where code was executed</li>
+</ul>
 </div>
-</div>
+</div id="just-this-list">
 </section>
 <section class="slide">
 <h2>Demo time!</h2>
-<div class="paragraph"><p>Code available on: <a class="bare" href="https://github.com/neo4jrb/lapd_incidents">https://github.com/neo4jrb/lapd_incidents</a></p></div>
 <div class="imageblock">
 <div class="content">
-<img alt="lapd model" height="400" src="img/lapd_model.png">
+<img alt="ruby code analysis model" height="450" src="img/ruby_code_analysis_model.png">
 </div>
 </div>
 </section>
