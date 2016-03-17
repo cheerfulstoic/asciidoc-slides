@@ -42,6 +42,7 @@ p {
 * Developer Advocate at Neo Technology
 * Ruby lover, data enthusiast
 * @ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
+* http://www.grandadventures-householdchores.com/[Grand Adventures and Household Chores]
 
 
 == Neo4j is a Graph Database
@@ -276,6 +277,7 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 * https://github.com/neo4jrb/neo4apis[neo4apis]
 * https://github.com/neo4jrb/neo4apis-twitter[neo4apis-twitter], https://github.com/neo4jrb/neo4apis-github[neo4apis-github], https://github.com/neo4jrb/neo4apis-activerecord[neo4apis-activerecord]
 * https://github.com/neo4j-examples/graph_starter[graph_starter]
+* https://github.com/neo4jrb/neolytics[neolytics]
 
 == Projects built with neo4j gem (applications)
 
@@ -291,7 +293,7 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 == Neo4j.rb resources
 
 * http://neo4jrb.io/[Neo4j.rb homepage]
-* https://github.com/neo4jrb/neo4j[neo4j gem]
+* https://github.com/neo4jrb/neo4j[neo4j gem on GitHub]
 * http://neo4j.com/developer/ruby-course/[Neo4j Ruby intro course]
 
 == Neo4j.rb resources (videos)
@@ -332,6 +334,14 @@ Brian Underwood
 Developer Advocate at Neo Technology
 
 @ https://twitter.com/cheerfulstoic[cheerfulstoic] | mailto:brian@brian-underwood.codes[brian@brian-underwood.codes]
+
+++++
+<br>
+++++
+
+My wife's travel blog:
+
+http://www.grandadventures-householdchores.com/[Grand Adventures and Household Chores]
 
 {nbsp} +
 {nbsp} +
