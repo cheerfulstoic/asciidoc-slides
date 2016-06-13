@@ -216,8 +216,8 @@ class Post
   property :subject
   property :text
 
-  has_one :out, :author, type: :written_by, model_class: 'User', rel_class: 'WrittenBy'
-  has_many :out, :tags, type: :tagged_as  # model_class 'Tag' is assumed
+  has_one :out, :author, type: :WRITTEN_BY, model_class: 'User', rel_class: 'WrittenBy'
+  has_many :out, :tags, type: :TAGGED_AS  # model_class 'Tag' is assumed
 end
 
 class WrittenBy
@@ -240,12 +240,12 @@ end
 ----
 
 class Post
-  has_one :out, :author, type: :written_by, model_class: 'User'
-  has_many :in, :comments, type: :comments_on
+  has_one :out, :author, type: :WRITTEN_BY, model_class: 'User'
+  has_many :in, :comments, type: :COMMENTS_ON
 end
 
 class Comment
-  has_one :out, :author, type: :written_by, model_class: 'User'
+  has_one :out, :author, type: :WRITTEN_BY, model_class: 'User'
 end
 
 class User
@@ -258,6 +258,81 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 # MATCH (u:User)<-[:written_by]-(:Post)<-[:comments_on]-(c:Comment)-[:written_by]->(u2:User)
 #   WHERE u.id = 123
 #   RETURN u2.name, count(c)
+----
+
+== A deeper example
+
+[source, ruby]
+----
+class Post
+  include Neo4j::ActiveNode
+  has_many :in, :categories, type: :COMMENTS_ON
+end
+
+class Comment
+  include Neo4j::ActiveNode
+  has_one :out, :post, type: :COMMENTS_ON
+  has_one :out, :author, type: :WRITTEN_BY, model_class: 'User'
+end
+
+class Category
+  include Neo4j::ActiveNode
+  property :name, constraint: :unique
+end
+
+def post_category_counts(comments)
+  include Neo4j::ActiveNode
+  comments.post(:post).categories(:category).pluck('category.name', 'count(post)')
+end
+
+class User
+  include Neo4j::ActiveNode
+  has_many :in, :posts, origin: :author
+end
+----
+
+== A deeper example
+
+[source, ruby]
+----
+class Comment
+  def self.post_category_counts
+    all.post(:post).categories(:category).pluck('category.name', 'count(post)')
+  end
+end
+----
+
+== A deeper example
+
+[source, bash]
+----
+> Comment.where(body: /.*mountains.*/i).post_category_counts
+
+ Comment#post#categories 3ms
+  MATCH (result_comment:`Comment`)
+  WHERE (result_comment.body =~ {result_comment_body})
+  MATCH (result_comment)-[rel1:`COMMENTS_ON`]->(post:`Post`)
+  MATCH (post)<-[rel2:`COMMENTS_ON`]-(category:`Category`)
+  RETURN
+    category.name,
+    count(post) | {:result_comment_body=>"(?i).*mountains.*"}
+----
+
+== A deeper example
+
+[source, bash]
+----
+> Comment.all.branch { author.where(age: (20..30)) }.post_category_counts
+
+ Comment#post#categories 6ms
+  MATCH (n:`Comment`)
+  MATCH (n)-[rel1:`WRITTEN_BY`]->(result_author:`User`)
+  WHERE (result_author.age IN RANGE({result_author_age_range_min}, {result_author_age_range_max}))
+  MATCH (n)-[rel3:`COMMENTS_ON`]->(post:`Post`)
+  MATCH (post)<-[rel4:`COMMENTS_ON`]-(category:`Category`)
+  RETURN
+    category.name,
+    count(post) | {:result_author_age_range_min=>20, :result_author_age_range_max=>30}
 ----
 
 +++ <!-- Here we're going to implement the same Cypher query from before but using the neo4j gem --> +++
