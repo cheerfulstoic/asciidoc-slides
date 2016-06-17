@@ -285,16 +285,16 @@ OGM (Object Graph Model)<div class="ulist">
   property :subject
   property :text
 
-  has_one :out, :author, type: :WRITTEN_BY, model_class: 'User', rel_class: 'WrittenBy'
-  has_many :out, :tags, type: :TAGGED_AS  # model_class 'Tag' is assumed
+  has_one :out, :author, type: :WRITTEN_BY, model_class: :User, rel_class: :WrittenBy
+  has_many :out, :tags, type: :TAGGED_AS  # model_class :Tag is assumed
 end
 
 class WrittenBy
   include Neo4j::ActiveRel
 
-  from_class Post
-  to_class   User
-  type :written_by
+  from_class :Post
+  to_class   :User
+  type :WRITTEN_BY # Not needed as default is based on model name
 
   property :location
 end</textarea>
@@ -307,12 +307,12 @@ end</textarea>
 <div class="listingblock">
 <div class="content">
 <textarea class="code" mode="ruby">class Post
-  has_one :out, :author, type: :WRITTEN_BY, model_class: 'User'
+  has_one :out, :author, type: :WRITTEN_BY, model_class: User
   has_many :in, :comments, type: :COMMENTS_ON
 end
 
 class Comment
-  has_one :out, :author, type: :WRITTEN_BY, model_class: 'User'
+  has_one :out, :author, type: :WRITTEN_BY, model_class: :User
 end
 
 class User
@@ -333,29 +333,20 @@ user.posts.comments(:c).author(:u2).pluck('u2.name, count(c)')
 <div class="listingblock">
 <div class="content">
 <textarea class="code" mode="ruby">class Post
-  include Neo4j::ActiveNode
   has_many :in, :categories, type: :COMMENTS_ON
 end
 
 class Comment
-  include Neo4j::ActiveNode
   has_one :out, :post, type: :COMMENTS_ON
-  has_one :out, :author, type: :WRITTEN_BY, model_class: 'User'
+  has_one :out, :author, type: :WRITTEN_BY, model_class: :User
 end
 
 class Category
-  include Neo4j::ActiveNode
   property :name, constraint: :unique
 end
 
 def post_category_counts(comments)
-  include Neo4j::ActiveNode
   comments.post(:post).categories(:category).pluck('category.name', 'count(post)')
-end
-
-class User
-  include Neo4j::ActiveNode
-  has_many :in, :posts, origin: :author
 end</textarea>
 </div>
 </div>
